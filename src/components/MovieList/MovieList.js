@@ -49,12 +49,15 @@ const MovieListDiv = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: 95vh;
+  height: 93vh;
+  width: 20vw;
 
   @media (min-width: 720px) {
-    flex-flow: row nowrap;
+    flex-flow: row;
     width: 85vw;
-    margin: 0 auto;
+    height: 35vh;
+    justify-content: space-between;
+    margin-top: 2rem;
   }
 `
 

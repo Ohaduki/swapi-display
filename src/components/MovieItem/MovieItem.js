@@ -15,16 +15,16 @@ const MovieItemDiv = styled.div`
   font-size: 0.5rem;
   cursor: pointer;
   height: 15vh;
-  width: 10vh;
   background-color: #FFC300;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  margin: 1vh;
   align-items: center;
   text-align: center;
   color: #ffe81e;
   border-radius: 5px;
+  border: 1px solid black;
+  border-style: outset;
   background: url(${props => props.poster});
   background-size: cover;
   text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
