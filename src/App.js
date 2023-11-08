@@ -8,17 +8,10 @@ function App() {
   const initialFavorites = JSON.parse(localStorage.getItem('favorites')) || [];
   const [favorites, setFavorites] = useState(initialFavorites);
   const [selectedMovie, setSelectedMovie] = useState(null);
-  const [background, setBackground] = useState("");
 
   useEffect(() => {
     localStorage.setItem('favorites', JSON.stringify(favorites));
   }, [favorites]);
-
-  useEffect(() => {
-    if (selectedMovie) {
-      setBackground(selectedMovie.poster);
-    }
-  }, [selectedMovie])
 
   const handleFavorite = (movie) => {
     if (favorites.some(fav => fav.episode_id === movie.episode_id)) {
@@ -33,10 +26,10 @@ function App() {
   }
 
   return (
-    <AppDiv className="App">
+    <AppDiv className="App" selected = {selectedMovie ? true : false}>
       <MovieDetails movie={selectedMovie} favorites={favorites} onFavoriteToggle={handleFavorite}/>
       <MovieList onMovieSelect={handleMovieSelect}/>
-      {background && <img src={background} alt='The background'/>}
+      <img src='./hd-posters/ship.jpg' alt='The background'/>
     </AppDiv>
   );
 
@@ -47,8 +40,10 @@ const AppDiv = styled.div`
   display: flex;
   flex-flow: row-reverse nowrap;
   align-items: center;
-  justify-content: space-between;
+  justify-content: ${props => props.selected ? 'space-between' : 'space-around'};
   height: 100vh;
+  width: 95vw;
+  margin: 0 auto;
 
   & img {
     position: absolute;
@@ -56,10 +51,10 @@ const AppDiv = styled.div`
     height: 100vh;
     object-fit: cover;
     background-position: center;
-    z-index: -1;
+    z-index: -1000;
     top: 0;
     left: 0;
-    opacity: 0.5;
+    opacity: 0.7;
   }
 
 
