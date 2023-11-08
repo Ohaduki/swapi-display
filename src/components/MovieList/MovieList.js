@@ -3,6 +3,7 @@ import { fetchMovies } from '@/services/api';
 import MovieItem from '@/components/MovieItem/MovieItem';
 import Loading from '@/components/Loading/Loading';
 import { getOmdbData } from '../../services/omdb';
+import styled from 'styled-components';
 
 function MovieList({ onMovieSelect }) {
   const [movies, setMovies] = useState([]);
@@ -31,7 +32,7 @@ function MovieList({ onMovieSelect }) {
   }, []);
 
   return (
-    <div>
+    <MovieListDiv>
         {isLoading ? (
             <Loading message="Loading Movies..."/>
         ) : (
@@ -39,8 +40,23 @@ function MovieList({ onMovieSelect }) {
             <MovieItem key={movie.episode_id} movie={movie} onMovieSelect={onMovieSelect} />
           ))
         )}
-    </div>
+    </MovieListDiv>
 );
 }
+
+const MovieListDiv = styled.div`
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 95vh;
+
+  @media (min-width: 720px) {
+    flex-flow: row nowrap;
+    width: 85vw;
+    margin: 0 auto;
+  }
+`
+
 
 export default MovieList;
