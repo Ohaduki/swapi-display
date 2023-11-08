@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { fetchMovies } from '@/services/api';
 import MovieItem from '@/components/MovieItem/MovieItem';
 import Loading from '@/components/Loading/Loading';
+import { getOmdbData } from '../../services/omdb';
 
 function MovieList({ onMovieSelect }) {
   const [movies, setMovies] = useState([]);
@@ -11,7 +12,14 @@ function MovieList({ onMovieSelect }) {
     async function getMovies() {
       try {
         const data = await fetchMovies();
-        setMovies(data);
+        const completeData = []
+        for(const movie of data){
+          const omdb = await getOmdbData(movie.title)
+          const completeMovie = {...movie, poster: omdb.Poster, imdbID: omdb.imdbID}
+          completeData.push(completeMovie)
+        }
+        completeData.sort((a, b) => a.episode_id - b.episode_id)
+        setMovies(completeData);
       } catch (error) {
         console.error("Failed fetching movies:", error);
       } finally {
