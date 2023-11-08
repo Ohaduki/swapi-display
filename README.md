@@ -60,6 +60,11 @@ Please notice the the SWAPI API might take some time to respond
     - Rectify each error ensuring the application displays and functions correctly.
     - Offer a concise explanation of the root causes and detail your solutions.
 
+    Error 1 - Clicking on a movie doesn't select it.
+      Each MovieItem is passed the setSelectedMovie function as a prop. This function was called, but not passed any arguments. This meant that the selectedMovie state was not being set to the correct movie. I just passed the movie object (used in the MovieItem component) to the function.
+
+    Error 2 - HandleFavorite function was defined, but not called. This meant that after error 1 was fixed, clicking on the favorite button for a movie raised an error and caused the application to crash. I passed the function as the relevant prop (onFavoriteToggle) to MovieDetails and this fixed the issue.
+
 2. **Styling:** 
     - Refactor the application's styling to match the provided [mockup](page_mockup.png)
     - Ensure the design is responsive and maintains consistency across various screen sizes and browsers.
