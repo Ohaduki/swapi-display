@@ -25,7 +25,7 @@ function App() {
 
   return (
     <div className="App">
-      <MovieDetails movie={selectedMovie} favorites={favorites} />
+      <MovieDetails movie={selectedMovie} favorites={favorites} onFavoriteToggle={handleFavorite}/>
       <MovieList onMovieSelect={handleMovieSelect}/>
     </div>
   );
